@@ -1,0 +1,6 @@
+services:
+  kafka-kraft:
+    image: bashj79/kafka-kraft:3.0.0
+    container_name: kafka
+    ports:
+      - 9092:9092
