@@ -1,6 +1,7 @@
 package com.hus.nonblockingkafkaretries.controllers
 
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -41,5 +42,10 @@ class MessageController {
                 ]
             }
             """.trimIndent()
+    }
+
+    @PostMapping("/send-message")
+    fun getMessages(message: String) {
+        println("Message received: $message")
     }
 }

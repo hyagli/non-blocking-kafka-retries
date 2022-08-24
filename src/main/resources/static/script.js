@@ -32,4 +32,20 @@ function setStatus(color) {
     document.getElementById("bg-status").classList.add("text-bg-" + color);
 }
 
-fetchRecords();
+$(function () {
+    fetchRecords();
+});
+
+$("form.kafka").submit(function (e){
+    e.preventDefault();
+    let form = $(this);
+    $.ajax({
+        type: "POST",
+        url: '/send-message',
+        data: form.serialize(),
+        success: function(data)
+        {
+            console.log(data);
+        }
+    });
+});
