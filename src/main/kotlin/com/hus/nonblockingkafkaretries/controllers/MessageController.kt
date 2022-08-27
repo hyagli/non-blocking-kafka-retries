@@ -1,51 +1,37 @@
 package com.hus.nonblockingkafkaretries.controllers
 
+import com.google.gson.Gson
+import com.hus.nonblockingkafkaretries.data.repo.MessageRepo
+import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class MessageController {
+class MessageController(
+    private val messageRepo: MessageRepo,
+    private val kafkaTemplate: KafkaTemplate<String, String>
+) {
     @GetMapping("/get-messages")
     fun getMessages(): String {
-        return """
-            {
-                "consumer1": [
-                    {
-                        "timestamp": "03:29:01.123",
-                        "message": "First"
-                    },
-                    {
-                        "timestamp": "03:29:01.123",
-                        "message": "Second"
-                    }
-                ],
-                "consumer2": [
-                    {
-                        "timestamp": "03:29:01.123",
-                        "message": "First 2"
-                    },
-                    {
-                        "timestamp": "03:29:01.123",
-                        "message": "Second 2"
-                    }
-                ],
-                "consumer3": [
-                    {
-                        "timestamp": "03:29:01.123",
-                        "message": "First 3"
-                    },
-                    {
-                        "timestamp": "03:29:01.123",
-                        "message": "Second 3"
-                    }
-                ]
+        val allMessages = messageRepo.findAll()
+        val data = allMessages.groupBy {
+            it.topic
+        }.map { entry ->
+            object {
+                val topic = entry.key
+                val messages = entry.value
             }
-            """.trimIndent()
+        }
+        return Gson().toJson(data)
     }
 
     @PostMapping("/send-message")
-    fun getMessages(message: String) {
+    fun sendMessage(message: String) {
         println("Message received: $message")
+        kafkaTemplate.send(
+            "my-queue",
+            message
+        )
     }
 }
