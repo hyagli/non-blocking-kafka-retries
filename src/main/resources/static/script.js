@@ -10,7 +10,7 @@ function fetchRecords() {
             setStatus("success")
         })
 
-    setTimeout(fetchRecords, 500)
+    setTimeout(fetchRecords, 250)
 }
 
 function createTables(consumers) {
@@ -36,6 +36,7 @@ function fillTable(tableBoxId, topic, messages) {
     let box = $(tableBoxId)
     box.find("h5").text(topic)
     let tableBody = box.find("tbody")
+    tableBody.children().remove()
     messages.forEach(message =>
         tableBody.append(
             $("<tr>").append(
