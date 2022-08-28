@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 import java.text.SimpleDateFormat
 
-@Suppress("unused")
 @RestController
 class MessageController(
     private val messageRepo: MessageRepo,

@@ -7,8 +7,10 @@ https://docs.spring.io/spring-kafka/reference/html/#retry-topic
 ### Guides
 
 * Start the docker kafka container. It is a single container kafka which is using [kafka-kraft](https://registry.hub.docker.com/r/bashj79/kafka-kraft).
+* Run the application.
 * The messages are stored in an in-memory H2 database.
 * The messages are polled from the backend automatically.
+* You can play with the retry settings by changing the `@RetryableTopic` arguments.
 
 ### Additional Links
 
