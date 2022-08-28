@@ -19,4 +19,4 @@ https://docs.spring.io/spring-kafka/reference/html/#retry-topic
 * https://www.confluent.io/blog/kafka-without-zookeeper-a-sneak-peek
 * https://getbootstrap.com/docs/5.2/getting-started/introduction/
 * https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-* http://vanilla-js.com/
+* https://jquery.com
